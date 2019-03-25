@@ -5,6 +5,8 @@ class Board
             @size = 12
         elsif size == "Medium"
             @size = 24
+        elsif size == "Large"
+            @size = 36
         end
     end
 end
