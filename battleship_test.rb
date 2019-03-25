@@ -5,7 +5,7 @@ class Test < Minitest::Test
         assert_equal(1,1)
     end
     def test_board_class
-        gameboard = Board.new
-        assert_equal(Board gameboard.class)
+        gameboard = Board.new("Easy")
+        assert_equal(Board, gameboard.class)
     end
 end
