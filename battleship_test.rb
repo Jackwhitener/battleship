@@ -13,5 +13,7 @@ class Test < Minitest::Test
         assert_equal(12, gameboard.size)
         gameboard1 = Board.new("Medium")
         assert_equal(24, gameboard1.size)
+        gameboard2 = Board.new("Large")
+        assert_equal(36, gameboard2.size)
     end
 end
