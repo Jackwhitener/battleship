@@ -16,4 +16,8 @@ class Test < Minitest::Test
         gameboard2 = Board.new("Large")
         assert_equal(36, gameboard2.size)
     end
+    def test_board_unit
+        gameboard = Board.new("Small")
+        assert_equal(144, gameboard.cells.count)
+    end
 end
