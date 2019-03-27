@@ -18,6 +18,6 @@ class Test < Minitest::Test
     end
     def test_board_unit
         gameboard = Board.new("Small")
-        assert_equal(144, gameboard.cells.count)
+        assert_equal(144, gameboard.cells)
     end
 end
