@@ -20,4 +20,8 @@ class Test < Minitest::Test
         gameboard = Board.new("Small")
         assert_equal(144, gameboard.cells.count)
     end
+    def test_indi_cell
+        gameboard = Board.new("Small")
+        assert_equal(1,2)
+    end
 end

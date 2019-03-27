@@ -1,3 +1,11 @@
+class Cell 
+    attr_accessor :coords
+    attr_accessor :status
+    def initialize(coords)
+        @coords = coords
+        @status = "Empty"
+    end
+end
 class Board
     attr_accessor :size
     attr_accessor :cells
