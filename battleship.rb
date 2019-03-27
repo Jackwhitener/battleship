@@ -1,11 +1,3 @@
-class Cell 
-    attr_accessor :coords
-    attr_accessor :status
-    def initialize(coords)
-        @coords = coords
-        @status = "Empty"
-    end
-end
 class Board
     attr_accessor :size
     attr_accessor :cells
@@ -33,7 +25,9 @@ class Board
             value = value.digits(100)
             ycoords.each do |valuey|
                 value << valuey
+                value << "Empty"
                 cells << value
+
                 value = value[0].digits(100)
             end
         end
