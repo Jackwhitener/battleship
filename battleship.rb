@@ -17,19 +17,17 @@ class Board
             xcoords = (1..24).to_a
             ycoords = (1..24).to_a
         elsif size == "Large"
-            xcoords = (1..24).to_a
-            ycoords = (1..24).to_a
+            xcoords = (1..36).to_a
+            ycoords = (1..36).to_a
         end
         cells = []
-        xcoords.each_with_index do |value, index|
+        xcoords.each do |value|
             value = value.digits(100)
-            value << ycoords[index]
-            cells << value
-        end
-        ycoords.each_with_index do |value, index|
-            value = value.digits(100)
-            value << xcoords[index]
-            cells << value
+            ycoords.each do |valuey|
+                value << valuey
+                cells << value
+                value = value[0].digits(100)
+            end
         end
         @cells = cells
     end
