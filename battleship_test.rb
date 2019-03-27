@@ -22,6 +22,6 @@ class Test < Minitest::Test
     end
     def test_indi_cell
         gameboard = Board.new("Small")
-        assert_equal([1,1,"Empty"], (gameboard.cells[0]))
+        assert_equal([[1,1],"Empty"], (gameboard.cells[0]))
     end
 end

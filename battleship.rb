@@ -25,9 +25,10 @@ class Board
             value = value.digits(100)
             ycoords.each do |valuey|
                 value << valuey
-                value << "Empty"
-                cells << value
-
+                value2 = []
+                value2 << value
+                value2 << "Empty"
+                cells << value2
                 value = value[0].digits(100)
             end
         end
