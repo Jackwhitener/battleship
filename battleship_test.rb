@@ -42,6 +42,7 @@ class Test < Minitest::Test
     def test_ship_location
         gameboard = Board.new("Small")
         ship = Ship.new(gameboard, 1)
-        assert_equal([0,"intact", [0,0]], ship.setlocation(0,0))
+        ship.setlocation([0,0], "Diagonal")
+        assert_equal([0,"intact", [0,0]], ship.cells[0])
     end
 end

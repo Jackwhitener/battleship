@@ -15,6 +15,18 @@ class Ship
         end
         @cells = cells
     end
+    def setlocation(coords, direction)
+        cells = self.cells
+        cells.each do |cell|
+            cell[2] = coords
+            if direction == "diagonal"
+                direction[1] += 1
+            end
+            if direction == "horizontal"
+                direction[0] += 1
+            end
+        end
+    end
 end
 class Board
     attr_accessor :size
