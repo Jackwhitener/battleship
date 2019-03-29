@@ -1,3 +1,9 @@
+class Ship
+    attr_reader :board
+    def initialize(board)
+     @board = board
+    end
+end
 class Board
     attr_accessor :size
     attr_accessor :cells

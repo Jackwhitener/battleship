@@ -25,8 +25,8 @@ class Test < Minitest::Test
         assert_equal([[1,1] ,"Empty"], (gameboard.cells[0]))
     end
     def test_ship_class
-        gameboard = Board.new
-        ship = Ship.new
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard)
         assert_equal(Ship, ship.class)
     end
 end
