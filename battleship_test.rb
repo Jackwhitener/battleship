@@ -34,4 +34,9 @@ class Test < Minitest::Test
         ship = Ship.new(gameboard, 2)
         assert_equal(2, ship.size)
     end
+    def test_ship_cells
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 2)
+        assert_equal([1,"intact",[0,0]], ship.cells[0])
+    end
 end
