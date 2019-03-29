@@ -1,9 +1,19 @@
 class Ship
     attr_reader :board
     attr_reader :size
+    attr_accessor :cells
     def initialize(board, size)
         @board = board
         @size = size
+        cells = []
+        size.times do |number|
+            cell = []
+            cell << number
+            cell << "intact"
+            cell << "Location Not Set"
+            cells << cell
+        end
+        @cells = cells
     end
 end
 class Board
