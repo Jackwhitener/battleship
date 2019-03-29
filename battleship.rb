@@ -1,7 +1,9 @@
 class Ship
     attr_reader :board
-    def initialize(board)
-     @board = board
+    attr_reader :size
+    def initialize(board, size)
+        @board = board
+        @size = size
     end
 end
 class Board

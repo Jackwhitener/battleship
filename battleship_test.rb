@@ -26,7 +26,12 @@ class Test < Minitest::Test
     end
     def test_ship_class
         gameboard = Board.new("Small")
-        ship = Ship.new(gameboard)
+        ship = Ship.new(gameboard, 2)
         assert_equal(Ship, ship.class)
+    end
+    def test_ship_size
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 2)
+        assert_equal(2, ship.size)
     end
 end
