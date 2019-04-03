@@ -114,6 +114,13 @@ class Board
         self.cells.each do |cell|
             if coords = cell[0]
                 return "Target Destroyed"
+                self.ships.each do |ship|
+                    ship.cells.each do |shipcell|
+                        if coords == shipcell[2]
+                            shipcell[1] = "destroyed"
+                        end
+                    end
+                end
             else
                 return "Target Not Found"
             end
