@@ -16,18 +16,34 @@ class Ship
         @cells = cells
     end
     def setlocation(coords, direction)
-        cells = self.cells
-        cells.each do |cell|
-            cell[2] = coords
-            puts  "This is coords: #{coords}"
-            if cells.length > 1
-                if direction == "Diagonal"
-                    coords[1] = coords[1] + 1
-                elsif direction == "Horizontal"
-                    coords[0] = coords[0] + 1
-                end
+        cellz = self.cells
+        puts "This is cellz: #{cellz}"
+        counter = 0
+        newarray = []
+        cellz.each do |cell|
+            newcoord = coords
+          
+            if direction == "Horizontal"
+                puts "This is newcoord horizontal: #{newcoord}"
+                newarray << [newcoord[0] + counter, newcoord[1]]
+            elsif direction == "Vertical"
+                puts "This is newcoord vertical: #{newcoord}"
+                newarray << [newcoord[0],newcoord[1] + counter] 
             end
+            puts "This is newarray after loop #{newarray}"
+            puts "This is new coords #{newcoord} for: #{cell}"
+            puts "This is the coords that were input #{coords}"
+            count = 0
+            newarray.each do |element|
+                cellz[count][2] = element
+                count += 1
+            end    
+            puts "This is newarray #{newarray}"
+            puts "this is cellz now: #{cellz}"
+            counter += 1
         end
+        puts "This is cellz after the loop: #{cellz}"
+        self.cells = cellz
     end
 end
 class Board
