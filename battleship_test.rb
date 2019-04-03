@@ -22,7 +22,7 @@ class Test < Minitest::Test
     end
     def test_indi_cell
         gameboard = Board.new("Small")
-        assert_equal([[1,1] ,"Empty"], (gameboard.cells[0]))
+        assert_equal([[0,0] ,"Empty"], (gameboard.cells[0]))
     end
     def test_ship_class
         gameboard = Board.new("Small")
@@ -52,5 +52,11 @@ class Test < Minitest::Test
         ship.setlocation([0,0], "Horizontal")
         assert_equal([0,"intact", [0,0]], ship.cells[0])
         assert_equal([1,"intact", [1,0]], ship.cells[1])
+    end
+    def test_ship_coords_map_writing
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 2)
+        ship.setlocation([0,0], "Vertical")
+        assert_equal([[0,0] ,"Contains: ship, 0"], gameboard.cells[0])
     end
 end

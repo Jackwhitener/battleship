@@ -17,33 +17,36 @@ class Ship
     end
     def setlocation(coords, direction)
         cellz = self.cells
-        puts "This is cellz: #{cellz}"
+        # puts "This is cellz: #{cellz}"
         counter = 0
         newarray = []
         cellz.each do |cell|
             newcoord = coords
           
             if direction == "Horizontal"
-                puts "This is newcoord horizontal: #{newcoord}"
+                # puts "This is newcoord horizontal: #{newcoord}"
                 newarray << [newcoord[0] + counter, newcoord[1]]
             elsif direction == "Vertical"
-                puts "This is newcoord vertical: #{newcoord}"
+                # puts "This is newcoord vertical: #{newcoord}"
                 newarray << [newcoord[0],newcoord[1] + counter] 
             end
-            puts "This is newarray after loop #{newarray}"
-            puts "This is new coords #{newcoord} for: #{cell}"
-            puts "This is the coords that were input #{coords}"
+            # puts "This is newarray after loop #{newarray}"
+            # puts "This is new coords #{newcoord} for: #{cell}"
+            # puts "This is the coords that were input #{coords}"
             count = 0
             newarray.each do |element|
                 cellz[count][2] = element
                 count += 1
             end    
-            puts "This is newarray #{newarray}"
-            puts "this is cellz now: #{cellz}"
+            # puts "This is newarray #{newarray}"
+            # puts "this is cellz now: #{cellz}"
             counter += 1
         end
-        puts "This is cellz after the loop: #{cellz}"
+        # puts "This is cellz after the loop: #{cellz}"
         self.cells = cellz
+        map = self.board.cells
+        puts "This is map #{map}"
+        
     end
 end
 class Board
@@ -59,14 +62,14 @@ class Board
         end
 
         if size == "Small"
-            xcoords = (1..12).to_a
-            ycoords = (1..12).to_a
+            xcoords = (0..11).to_a
+            ycoords = (0..11).to_a
         elsif size == "Medium"
-            xcoords = (1..24).to_a
-            ycoords = (1..24).to_a
+            xcoords = (0..23).to_a
+            ycoords = (0..23).to_a
         elsif size == "Large"
-            xcoords = (1..36).to_a
-            ycoords = (1..36).to_a
+            xcoords = (0..35).to_a
+            ycoords = (0..35).to_a
         end
         cells = []
         xcoords.each do |value|
