@@ -109,4 +109,7 @@ class Board
         end
         return foundcells
     end
+    def hit(coords)
+
+    end
 end
