@@ -57,6 +57,6 @@ class Test < Minitest::Test
         gameboard = Board.new("Small")
         ship = Ship.new(gameboard, 2)
         ship.setlocation([0,0], "Vertical")
-        assert_equal([[0,0] ,"Contains: ship, 0"], gameboard.cells[0])
+        assert_equal([[0,0] ,"Contains: #{ship.name}, 0"], gameboard.cells[0])
     end
 end

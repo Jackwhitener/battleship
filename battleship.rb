@@ -2,9 +2,11 @@ class Ship
     attr_reader :board
     attr_reader :size
     attr_accessor :cells
+    attr_reader :name
     def initialize(board, size)
         @board = board
         @size = size
+        @name = self
         cells = []
         size.times do |number|
             cell = []
@@ -43,10 +45,13 @@ class Ship
             counter += 1
         end
         # puts "This is cellz after the loop: #{cellz}"
-        self.cells = cellz
-        map = self.board.cells
-        puts "This is map #{map}"
-        
+        amountfound = self.board.setlocations(self.cells, self)
+        if amountfound != self.size
+            return "NO"
+        else
+            return "COORDINATES SET"
+            self.cells = cellz
+        end
     end
 end
 class Board
@@ -84,5 +89,24 @@ class Board
             end
         end
         @cells = cells
+    end
+    def setlocations(shipcells, ship)
+        mecells = self.cells
+        foundcells = 0
+        # puts "This is mecells #{mecells}"
+        shipcells.each do |shipcell|
+            # puts "This is shipcell: #{shipcell}"
+            mecells.each do |mecell|
+                # puts "This is shipcell #{shipcell}"
+                # puts "This is mecell #{mecell}"
+                # puts "This is shipcell position 2 #{shipcell[2]}"
+                if shipcell[2] == mecell[0]
+                    foundcells += 1
+                    # puts "Match found!"
+                    mecell[1] = "Contains: #{ship.name}, #{shipcell[0]}" 
+                end
+            end
+        end
+        return foundcells
     end
 end
