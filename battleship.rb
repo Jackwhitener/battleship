@@ -6,7 +6,6 @@ class Ship
     def initialize(board, size)
         @board = board
         @size = size
-        @name = self
         cells = []
         size.times do |number|
             cell = []
@@ -51,12 +50,14 @@ class Ship
         else
             return "COORDINATES SET"
             self.cells = cellz
+            self.board.ships << self
         end
     end
 end
 class Board
     attr_accessor :size
     attr_accessor :cells
+    attr_accessor :ships
     def initialize(size)
         if size == "Small"
             @size = 12
@@ -65,7 +66,6 @@ class Board
         elsif size == "Large"
             @size = 36
         end
-
         if size == "Small"
             xcoords = (0..11).to_a
             ycoords = (0..11).to_a
@@ -76,6 +76,7 @@ class Board
             xcoords = (0..35).to_a
             ycoords = (0..35).to_a
         end
+        @ships = []
         cells = []
         xcoords.each do |value|
             value = value.digits(100)
@@ -103,13 +104,19 @@ class Board
                 if shipcell[2] == mecell[0]
                     foundcells += 1
                     # puts "Match found!"
-                    mecell[1] = "Contains: #{ship.name}, #{shipcell[0]}" 
+                    mecell[1] = ["Contains:", ship.name, shipcell[0]]
                 end
             end
         end
         return foundcells
     end
     def hit(coords)
-
+        self.cells.each do |cell|
+            if coords = cell[0]
+                return "Target Destroyed"
+            else
+                return "Target Not Found"
+            end
+        end
     end
 end
