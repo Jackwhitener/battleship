@@ -48,9 +48,9 @@ class Ship
         # puts "This is cellz after the loop: #{cellz}"
         amountfound = self.board.setlocations(self.cells, self)
         if amountfound != self.size
-            return "NO"
-        elsif amountfound = "OCCUPIED"
-            return "Placement Failed: Tile Occupied"
+            return "Placement Failed"
+        elsif amountfound == 0
+            return "Placement Failed"
         else
             return "COORDINATES SET"
             self.cells = cellz
@@ -120,12 +120,14 @@ class Board
                 # puts "This is mecell #{mecell}"
                 # puts "This is shipcell position 2 #{shipcell[2]}"
                 if shipcell[2] == mecell[0]
-                    if mecell.include?("Contains:")
-                        foundcells = "OCCUPIED"
-                    else
-                    foundcells += 1
-                    # puts "Match found!"
-                    mecell[1] = ["Contains:", ship.name, shipcell[0]]
+                    puts "This is MECELL: #{mecell}"
+                    puts "This is mecell[1][0]: #{mecell[1][0]}"
+                    if mecell[1][0] == "Contains:"
+                        # foundcells = "OCCUPIED"
+                    elsif mecell[1][0] != "Contains:"
+                        foundcells += 1
+                        # puts "Match found!"
+                        mecell[1] = ["Contains:", ship.name, shipcell[0]]
                     end
                 end
             end

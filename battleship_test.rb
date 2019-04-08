@@ -90,6 +90,11 @@ class Test < Minitest::Test
         ship = Ship.new(gameboard, 3)
         ship1 = Ship.new(gameboard, 3)
         ship.setlocation([0,0], "Vertical")
-        assert_equal("Placement Failed: Tile Occupied", ship1.setlocation([0,0], "Horizontal"))
+        assert_equal("Placement Failed", ship1.setlocation([0,0], "Horizontal"))
+    end
+    def test_rollover_prevention
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 3)
+        assert_equal("Placement Failed", ship.setlocation([0,12], "Vertical"))
     end
 end
