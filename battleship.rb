@@ -2,11 +2,13 @@ class Ship
     attr_reader :board
     attr_reader :size
     attr_reader :name
+    attr_accessor :status
     attr_accessor :cells
     def initialize(board, size)
         @board = board
         @size = size
         @name = self
+        @status = "Intact"
         cells = []
         size.times do |number|
             cell = []
@@ -56,9 +58,16 @@ class Ship
     def destroy(coords)
         self.cells.each do |cell|
             if cell[2] == coords
+                if cells.include?(["intact"])
+                    self.status = "Damaged"
+                else
+                    self.status = "Destroyed"
+                end
                 cell[1] = "destroyed"
             end
+            
         end
+
     end
 end
 class Board
