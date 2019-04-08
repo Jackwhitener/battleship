@@ -4,11 +4,13 @@ class Ship
     attr_reader :name
     attr_accessor :status
     attr_accessor :cells
+    attr_accessor :direction
     def initialize(board, size)
         @board = board
         @size = size
         @name = self
         @status = "Intact"
+        @direction = "Not Set"
         cells = []
         size.times do |number|
             cell = []
@@ -20,6 +22,7 @@ class Ship
         @cells = cells
     end
     def setlocation(coords, direction)
+        @direction = direction
         cellz = self.cells
         # puts "This is cellz: #{cellz}"
         counter = 0
@@ -46,7 +49,8 @@ class Ship
             counter += 1
         end
         # puts "This is cellz after the loop: #{cellz}"
-        amountfound = self.board.setlocations(self.cells, self)
+        amountfound = self.board.setlocations(self.cells, self, self.direction)
+        # puts "This is amountfound: #{amountfound}"
         if amountfound != self.size
             return "Placement Failed"
         elsif amountfound == 0
@@ -109,8 +113,17 @@ class Board
         end
         @cells = cells
     end
-    def setlocations(shipcells, ship)
+    def setlocations(shipcells, ship, direction)
         mecells = self.cells
+        cellarray = []
+        mecells.each do |cell|
+            if direction == "Vertical"
+                cellarray << cell[1]
+            elsif direction == "Horizontal"
+                cellarray << cell[0]
+            end
+            cellarray.uniq!
+        end 
         foundcells = 0
         # puts "This is mecells #{mecells}"
         shipcells.each do |shipcell|
@@ -120,8 +133,8 @@ class Board
                 # puts "This is mecell #{mecell}"
                 # puts "This is shipcell position 2 #{shipcell[2]}"
                 if shipcell[2] == mecell[0]
-                    puts "This is MECELL: #{mecell}"
-                    puts "This is mecell[1][0]: #{mecell[1][0]}"
+                    # puts "This is MECELL: #{mecell}"
+                    # puts "This is mecell[1][0]: #{mecell[1][0]}"
                     if mecell[1][0] == "Contains:"
                         # foundcells = "OCCUPIED"
                     elsif mecell[1][0] != "Contains:"
@@ -132,7 +145,11 @@ class Board
                 end
             end
         end
-        return foundcells
+        if cellarray.length != 1
+            return "COORDINATES NOT SET"
+        else
+            return foundcells
+        end
     end
     def hit(coords)
         self.cells.each do |cell|
