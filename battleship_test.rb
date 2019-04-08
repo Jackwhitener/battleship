@@ -85,4 +85,11 @@ class Test < Minitest::Test
         gameboard.hit([2,0])
         assert_equal("Destroyed", ship.status)
     end
+    def test_sharesquare_prevention
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 3)
+        ship1 = Ship.new(gameboard, 3)
+        ship.setlocation([0,0], "Vertical")
+        assert_equal("Placement Failed: Tile Occupied", ship1.setlocation([0,0], "Horizontal"))
+    end
 end
