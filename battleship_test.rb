@@ -65,4 +65,15 @@ class Test < Minitest::Test
         ship.setlocation([0,0], "Vertical")
         assert_equal("Target Destroyed", gameboard.hit([0,0]))
     end
+    def test_ship_destroyed
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 2)
+        ship.setlocation([0,0], "Vertical")
+        gameboard.hit([0,0])
+        assert_equal([0,"destroyed", [0,0]], ship.cells[0])
+    end
+    def test_ship_miss
+        gameboard = Board.new("Small")
+        assert_equal("Target Not Found", gameboard.hit([0,0]))
+    end
 end

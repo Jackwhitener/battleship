@@ -1,11 +1,12 @@
 class Ship
     attr_reader :board
     attr_reader :size
-    attr_accessor :cells
     attr_reader :name
+    attr_accessor :cells
     def initialize(board, size)
         @board = board
         @size = size
+        @name = self
         cells = []
         size.times do |number|
             cell = []
@@ -23,7 +24,6 @@ class Ship
         newarray = []
         cellz.each do |cell|
             newcoord = coords
-          
             if direction == "Horizontal"
                 # puts "This is newcoord horizontal: #{newcoord}"
                 newarray << [newcoord[0] + counter, newcoord[1]]
@@ -51,6 +51,13 @@ class Ship
             return "COORDINATES SET"
             self.cells = cellz
             self.board.ships << self
+        end
+    end
+    def destroy(coords)
+        self.cells.each do |cell|
+            if cell[2] == coords
+                cell[1] = "destroyed"
+            end
         end
     end
 end
@@ -112,15 +119,10 @@ class Board
     end
     def hit(coords)
         self.cells.each do |cell|
-            if coords = cell[0]
+            # puts "Current cell: #{cell}"
+            if coords == cell[0] && cell[1].include?("Contains:")
+                cell[1][1].destroy(coords)
                 return "Target Destroyed"
-                self.ships.each do |ship|
-                    ship.cells.each do |shipcell|
-                        if coords == shipcell[2]
-                            shipcell[1] = "destroyed"
-                        end
-                    end
-                end
             else
                 return "Target Not Found"
             end
