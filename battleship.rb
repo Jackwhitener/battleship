@@ -5,6 +5,7 @@ class Ship
     attr_accessor :status
     attr_accessor :cells
     attr_accessor :direction
+
     def initialize(board, size)
         @board = board
         @size = size
@@ -80,6 +81,7 @@ class Board
     attr_accessor :size
     attr_accessor :cells
     attr_accessor :ships
+    attr_accessor :hidden
     def initialize(size)
         if size == "Small"
             @size = 12
@@ -98,6 +100,7 @@ class Board
             xcoords = (0..35).to_a
             ycoords = (0..35).to_a
         end
+        @hidden = false
         @ships = []
         cells = []
         xcoords.each do |value|
