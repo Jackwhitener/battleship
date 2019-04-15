@@ -106,4 +106,10 @@ class Test < Minitest::Test
         gameboard.hide
         assert_equal("Map Succesfully Displayed", gameboard.display)
     end
+    def test_display_ship
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 6)
+        ship.setlocation([0,0], "Horizontal")
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
 end

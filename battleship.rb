@@ -173,6 +173,7 @@ class Board
         end
     end
     def display
+        puts " "
         displayarray = []
         if self.size == 12
             12.times do
@@ -207,14 +208,20 @@ class Board
             # puts "This is row #{row}"
             row.each do |cell|
                 # puts "This is cell: #{cell}"
-                if cell[2] == "Hidden"
+                if cell.include?("Hidden")
                     print "(?)"
-                elsif cell[2] == nil
-                    print "(~)"
+                else
+                    # puts cell[1]
+                    if cell[1][0] == "Contains:"
+                       print "(#{cell[1][1].cells.length})"
+                    else
+                        print "(~)"
+                    end
                 end
             end
             puts " "
         end
+        puts " "
         return "Map Succesfully Displayed"
     end
 end
