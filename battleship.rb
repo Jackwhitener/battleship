@@ -159,8 +159,10 @@ class Board
             # puts "Current cell: #{cell}"
             if coords == cell[0] && cell[1].include?("Contains:")
                 cell[1][1].destroy(coords)
+                cell.delete_at(2)
                 return "Target Destroyed"
             else
+                cell.delete_at(2)
                 return "Target Not Found"
             end
         end
@@ -200,17 +202,19 @@ class Board
                 displayarray << arr
             end
         end
+        # puts displayarray
         displayarray.each do |row|
+            # puts "This is row #{row}"
             row.each do |cell|
-                if cell.include?("hidden")
+                # puts "This is cell: #{cell}"
+                if cell[2] == "Hidden"
                     print "(?)"
-                else
+                elsif cell[2] == nil
                     print "(~)"
-                    return "Map Succesfully Displayed"
                 end
-                
             end
             puts " "
         end
+        return "Map Succesfully Displayed"
     end
 end

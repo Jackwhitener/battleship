@@ -101,4 +101,9 @@ class Test < Minitest::Test
         gameboard = Board.new("Small")
         assert_equal("Map Succesfully Displayed", gameboard.display)
     end
+    def test_display_hidden
+        gameboard = Board.new("Small")
+        gameboard.hide
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
 end
