@@ -228,7 +228,10 @@ class Board
                     # puts cell[1]
                     if cell[1][0] == "Contains:"
                         
-                       print "(#{cell[1][1].cells.length}I)"
+                       print "(#{cell[1][1].cells.length}"
+                       print "I)" if cell[1][1].status == "Intact"
+                       print "D)" if cell[1][1].status == "Damaged"
+                       print "X)" if cell[1][1].status == "Destroyed"
                     else
                         print "(~~)"
                     end
