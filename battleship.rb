@@ -165,4 +165,52 @@ class Board
             end
         end
     end
+    def hide
+        self.cells.each do |cell|
+            cell << "Hidden"
+        end
+    end
+    def display
+        displayarray = []
+        if self.size == 12
+            12.times do
+                arr = [] 
+                12.times do |number|
+                    arr << self.cells[number]
+
+                end
+                displayarray << arr
+            end
+        elsif self.size == 24
+            24.times do
+                arr = [] 
+                24.times do |number|
+                    arr << self.cells[number]
+
+                end
+                displayarray << arr
+            end
+        elsif self.size == 36
+            36.times do
+                arr = [] 
+                36.times do |number|
+                    arr << self.cells[number]
+
+                end
+                displayarray << arr
+            end
+        end
+        displayarray.each do |row|
+            row.each do |cell|
+                if cell.include?("hidden")
+                    print "(?)"
+                else
+                    print "(~)"
+                    return "Map Succesfully Displayed"
+                end
+                
+            end
+            puts " "
+        end
+    end
 end
