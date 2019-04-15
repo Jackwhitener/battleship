@@ -29,11 +29,11 @@ class Ship
         counter = 0
         newarray = []
         cellz.each do |cell|
-            newcoord = coords
-            if direction == "Horizontal"
+            newcoord = coords.reverse
+            if direction == "Vertical"
                 # puts "This is newcoord horizontal: #{newcoord}"
                 newarray << [newcoord[0] + counter, newcoord[1]]
-            elsif direction == "Vertical"
+            elsif direction == "Horizontal"
                 # puts "This is newcoord vertical: #{newcoord}"
                 newarray << [newcoord[0],newcoord[1] + counter] 
             end
@@ -176,10 +176,10 @@ class Board
         puts " "
         displayarray = []
         if self.size == 12
-            12.times do
+            12.times do |number|
                 arr = [] 
-                12.times do |number|
-                    arr << self.cells[number]
+                12.times do |number1|
+                    arr << self.cells[number1 + (number * 12)]
 
                 end
                 displayarray << arr
@@ -187,8 +187,8 @@ class Board
         elsif self.size == 24
             24.times do
                 arr = [] 
-                24.times do |number|
-                    arr << self.cells[number]
+                24.times do |number1|
+                    arr << self.cells[number1]
 
                 end
                 displayarray << arr
@@ -197,29 +197,44 @@ class Board
             36.times do
                 arr = [] 
                 36.times do |number|
-                    arr << self.cells[number]
+                    arr << self.cells[number1]
 
                 end
                 displayarray << arr
             end
         end
-        # puts displayarray
+        # puts "This is displayarray: #{displayarray}"
+        print "    "
+        displayarray.length.times do |num|
+            print "("
+            print num
+            if num < 10
+                print " "
+            end
+            print ")"
+        end
+        puts " "
+        displaycounter = 0
         displayarray.each do |row|
             # puts "This is row #{row}"
+            print "(#{displaycounter}"
+            print " " if displaycounter < 10 
+            print ")"
             row.each do |cell|
                 # puts "This is cell: #{cell}"
                 if cell.include?("Hidden")
-                    print "(?)"
+                    print "(??)"
                 else
                     # puts cell[1]
                     if cell[1][0] == "Contains:"
-                       print "(#{cell[1][1].cells.length})"
+                       print "(#{cell[1][1].cells.length}#{cell[1][1].cells.length})"
                     else
-                        print "(~)"
+                        print "(~~)"
                     end
                 end
             end
             puts " "
+            displaycounter += 1
         end
         puts " "
         return "Map Succesfully Displayed"

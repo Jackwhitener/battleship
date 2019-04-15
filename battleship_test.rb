@@ -44,14 +44,14 @@ class Test < Minitest::Test
         ship = Ship.new(gameboard, 2)
         ship.setlocation([0,0], "Vertical")
         assert_equal([0,"intact", [0,0]], ship.cells[0])
-        assert_equal([1,"intact", [0,1]], ship.cells[1])
+        assert_equal([1,"intact", [1,0]], ship.cells[1])
     end
     def test_ship_long_location
         gameboard = Board.new("Small")
         ship = Ship.new(gameboard, 5)
         ship.setlocation([0,0], "Horizontal")
         assert_equal([0,"intact", [0,0]], ship.cells[0])
-        assert_equal([1,"intact", [1,0]], ship.cells[1])
+        assert_equal([1,"intact", [0,1]], ship.cells[1])
     end
     def test_ship_coords_map_writing
         gameboard = Board.new("Small")
@@ -109,7 +109,7 @@ class Test < Minitest::Test
     def test_display_ship
         gameboard = Board.new("Small")
         ship = Ship.new(gameboard, 6)
-        ship.setlocation([0,0], "Horizontal")
+        ship.setlocation([4,0], "Vertical")
         assert_equal("Map Succesfully Displayed", gameboard.display)
     end
 end
