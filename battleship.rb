@@ -227,7 +227,8 @@ class Board
                 else
                     # puts cell[1]
                     if cell[1][0] == "Contains:"
-                       print "(#{cell[1][1].cells.length}#{cell[1][1].cells.length})"
+                        
+                       print "(#{cell[1][1].cells.length}I)"
                     else
                         print "(~~)"
                     end
