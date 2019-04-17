@@ -63,18 +63,21 @@ class Ship
         end
     end
     def destroy(coords)
+        counter = 0
         self.cells.each do |cell|
             if cell[2] == coords
-                if cells.include?(["intact"])
-                    self.status = "Damaged"
-                else
-                    self.status = "Destroyed"
-                end
+                # puts "This is cell: #{cell}"
                 cell[1] = "destroyed"
             end
-            
+            if cell.include?("destroyed")
+                counter += 1
+            end
         end
-
+        if counter == self.size
+            self.status = "Destroyed"
+        else
+            self.status = "Damaged"
+        end
     end
 end
 class Board
@@ -155,6 +158,7 @@ class Board
         end
     end
     def hit(coords)
+        coords.reverse!
         self.cells.each do |cell|
             # puts "Current coords #{coords}"
             # puts "Current cell: #{cell}"
