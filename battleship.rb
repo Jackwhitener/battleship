@@ -156,12 +156,13 @@ class Board
     end
     def hit(coords)
         self.cells.each do |cell|
+            # puts "Current coords #{coords}"
             # puts "Current cell: #{cell}"
             if coords == cell[0] && cell[1].include?("Contains:")
                 cell[1][1].destroy(coords)
                 cell.delete_at(2)
                 return "Target Destroyed"
-            else
+            elsif coords == cell[0] && false == cell[1].include?("Contains:")
                 cell.delete_at(2)
                 return "Target Not Found"
             end

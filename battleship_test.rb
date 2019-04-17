@@ -97,19 +97,25 @@ class Test < Minitest::Test
         ship = Ship.new(gameboard, 3)
         assert_equal("Placement Failed", ship.setlocation([0,11], "Horizontal"))
     end
-    def test_display
-        gameboard = Board.new("Small")
-        assert_equal("Map Succesfully Displayed", gameboard.display)
-    end
-    def test_display_hidden
+    # def test_display
+    #     gameboard = Board.new("Small")
+    #     assert_equal("Map Succesfully Displayed", gameboard.display)
+    # end
+    # def test_display_hidden
+    #     gameboard = Board.new("Small")
+    #     gameboard.hide
+    #     assert_equal("Map Succesfully Displayed", gameboard.display)
+    # end
+    # def test_display_ship
+    #     gameboard = Board.new("Small")
+    #     ship = Ship.new(gameboard, 6)
+    #     ship.setlocation([4,0], "Vertical")
+    #     assert_equal("Map Succesfully Displayed", gameboard.display)
+    # end
+    def test_display_discovered_tiles
         gameboard = Board.new("Small")
         gameboard.hide
-        assert_equal("Map Succesfully Displayed", gameboard.display)
-    end
-    def test_display_ship
-        gameboard = Board.new("Small")
-        ship = Ship.new(gameboard, 6)
-        ship.setlocation([4,0], "Vertical")
+        gameboard.hit([4,5])
         assert_equal("Map Succesfully Displayed", gameboard.display)
     end
 end
