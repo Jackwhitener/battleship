@@ -97,36 +97,40 @@ class Test < Minitest::Test
         ship = Ship.new(gameboard, 3)
         assert_equal("Placement Failed", ship.setlocation([0,11], "Horizontal"))
     end
-    # def test_display
-    #     gameboard = Board.new("Small")
-    #     assert_equal("Map Succesfully Displayed", gameboard.display)
-    # end
-    # def test_display_hidden
-    #     gameboard = Board.new("Small")
-    #     gameboard.hide
-    #     assert_equal("Map Succesfully Displayed", gameboard.display)
-    # end
-    # def test_display_ship
-    #     gameboard = Board.new("Small")
-    #     ship = Ship.new(gameboard, 6)
-    #     ship.setlocation([4,0], "Vertical")
-    #     assert_equal("Map Succesfully Displayed", gameboard.display)
-    # end
-    # def test_display_discovered_tiles
-    #     gameboard = Board.new("Small")
-    #     gameboard.hide
-    #     gameboard.hit([4,5])
-    #     assert_equal("Map Succesfully Displayed", gameboard.display)
-    # end
+    def test_display
+        gameboard = Board.new("Small")
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
+    def test_display_hidden
+        gameboard = Board.new("Small")
+        gameboard.hide
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
+    def test_display_ship
+        gameboard = Board.new("Small")
+        ship = Ship.new(gameboard, 6)
+        ship.setlocation([4,0], "Vertical")
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
+    def test_display_discovered_tiles
+        gameboard = Board.new("Small")
+        gameboard.hide
+        gameboard.hit([4,5])
+        assert_equal("Map Succesfully Displayed", gameboard.display)
+    end
     def test_all_together_now
         gameboard = Board.new("Small")
         ship = Ship.new(gameboard, 6)
         ship.setlocation([1,0], "Horizontal")
+        ship2 = Ship.new(gameboard, 3)
+        ship2.setlocation([1,2], "Horizontal")
         gameboard.hide
         gameboard.hit([1,0])
         gameboard.hit([2,0])
-        gameboard.display
-        # puts gameboard.cells
-        assert_equal(1,1)
+        gameboard.hit([3,0])
+        gameboard.hit([1,2])
+        gameboard.hit([2,2])
+        gameboard.hit([3,2])
+        assert_equal("Map Succesfully Displayed", gameboard.display)
     end
 end
