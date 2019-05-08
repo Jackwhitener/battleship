@@ -24,8 +24,10 @@ class Ship
     end
     def setlocation(coords, direction)
         @direction = direction
+        
         cellz = self.cells
         # puts "This is cellz: #{cellz}"
+        # puts "This is direction: #{direction.class}"
         counter = 0
         newarray = []
         cellz.each do |cell|
@@ -35,7 +37,9 @@ class Ship
                 newarray << [newcoord[0] + counter, newcoord[1]]
             elsif direction == "Horizontal"
                 # puts "This is newcoord vertical: #{newcoord}"
-                newarray << [newcoord[0],newcoord[1] + counter] 
+                newarray << [newcoord[0],newcoord[1] + counter]
+            else
+                puts "He's dead, Jim." 
             end
             # puts "This is newarray after loop #{newarray}"
             # puts "This is new coords #{newcoord} for: #{cell}"
@@ -52,9 +56,12 @@ class Ship
         # puts "This is cellz after the loop: #{cellz}"
         amountfound = self.board.setlocations(self.cells, self, self.direction)
         # puts "This is amountfound: #{amountfound}"
+        # puts "This is the self.size: #{self.size}"
         if amountfound != self.size
             return "Placement Failed"
         elsif amountfound == 0
+            return "Placement Failed"
+        elsif amountfound == "COORDINATES NOT SET"
             return "Placement Failed"
         else
             return "COORDINATES SET"
@@ -122,14 +129,16 @@ class Board
     def setlocations(shipcells, ship, direction)
         mecells = self.cells
         cellarray = []
-        mecells.each do |cell|
-            if direction == "Vertical"
-                cellarray << cell[1]
-            elsif direction == "Horizontal"
-                cellarray << cell[0]
-            end
+        shipcells.each do |cell|
+            # puts "This is a cell: #{cell}"
+              if direction == "Vertical"
+                 cellarray << cell[2][1]
+             elsif direction == "Horizontal"
+                 cellarray << cell[2][0]
+             end
             cellarray.uniq!
         end 
+        # puts "This is cellarray #{cellarray}"
         foundcells = 0
         # puts "This is mecells #{mecells}"
         shipcells.each do |shipcell|
@@ -152,6 +161,26 @@ class Board
             end
         end
         if cellarray.length != 1
+            mecells.each do |shipcells|
+                # puts "This is shipcell: #{shipcells}"
+                    if shipcells[1] != "Empty" 
+                        # puts "Cell emptied"
+                        shipcells[1] = "Empty"
+                    end
+                # puts "This should be an empty shipcell: #{shipcells}"
+            end
+            return "COORDINATES NOT SET"
+        elsif foundcells != ship.size
+            # puts "This is foundcells: #{foundcells}"
+            # puts "This is ship.size: #{ship.size}"
+            mecells.each do |shipcells|
+                # puts "This is shipcell: #{shipcells}"
+                    if shipcells[1] != "Empty" 
+                        # puts "Cell emptied"
+                        shipcells[1] = "Empty"
+                    end
+                # puts "This should be an empty shipcell: #{shipcells}"
+            end
             return "COORDINATES NOT SET"
         else
             return foundcells

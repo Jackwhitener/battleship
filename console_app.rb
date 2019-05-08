@@ -46,16 +46,28 @@ while set == false
 end
 playerwins = false
 computerwins = false
+destroyerplaced = false
+until destroyerplaced == true
+    player.display
 puts "Where do you want to place your destroyer on the x-axis? (right-to-left)"
-xcoord = gets
+xcoord = gets.chomp
 puts "Where do you want to place your destroyer on the y-axis? (up-to-down)"
-ycoord = gets
+ycoord = gets.chomp
 puts "Would you like your destroyer to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
-direction = gets
-set = destroyer.setlocation([xcoord.to_i,ycoord.to_i], direction)
-puts set
-if set != "COORDINATES SET"
-    puts "Something went wrong!"
+direction = gets.chomp
+# puts "This is xcoord: #{xcoord}"
+# puts "This is ycoord: #{ycoord}"
+# puts "This is direction: #{direction}"
+set = destroyer.setlocation([xcoord.to_i, ycoord.to_i], direction)
+
+
+if set == "COORDINATES SET"
+    puts "Destroyer placed!"
+    destroyerplaced = true
+    player.display
+else
+    puts "Something went wrong, try again!"
+end
 end
 # until playerwins == true || computerwins == true
 
