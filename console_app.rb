@@ -93,6 +93,30 @@ else
     puts "Something went wrong, try again!"
 end
 end
+
+battleshipplaced = false
+until battleshipplaced == true
+    player.display
+puts "Where do you want to place your battleship on the x-axis? (right-to-left)"
+xcoord = gets.chomp
+puts "Where do you want to place your battleship on the y-axis? (up-to-down)"
+ycoord = gets.chomp
+puts "Would you like your battleship to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
+direction = gets.chomp
+# puts "This is xcoord: #{xcoord}"
+# puts "This is ycoord: #{ycoord}"
+# puts "This is direction: #{direction}"
+set = battleship.setlocation([xcoord.to_i, ycoord.to_i], direction)
+
+
+if set == "COORDINATES SET"
+    puts "Battleship placed!"
+    battleshipplaced = true
+    player.display
+else
+    puts "Something went wrong, try again!"
+end
+end
 # until playerwins == true || computerwins == true
 
 # end
