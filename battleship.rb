@@ -219,20 +219,18 @@ class Board
                 displayarray << arr
             end
         elsif self.size == 24
-            24.times do
+            24.times do |number|
                 arr = [] 
                 24.times do |number1|
-                    arr << self.cells[number1]
-
+                    arr << self.cells[number1 + (number * 24)]
                 end
                 displayarray << arr
             end
         elsif self.size == 36
-            36.times do
+            36.times do |number|
                 arr = [] 
-                36.times do |number|
-                    arr << self.cells[number1]
-
+                36.times do |number1|
+                    arr << self.cells[number1 + (number * 36)]
                 end
                 displayarray << arr
             end
