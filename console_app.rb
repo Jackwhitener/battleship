@@ -211,10 +211,16 @@ else
     esubmarine.setlocation([sxcoord.to_i, sycoord.to_i], sdirection)
 end
 end
-# computer.hide
+computer.hide
 until (destroyer.status == "Destroyed" && submarine.status == "Destroyed" && battleship.status == "Destroyed" && carrier.status == "Destroyed") || (edestroyer.status == "Destroyed" && esubmarine.status == "Destroyed" && ebattleship.status == "Destroyed" && ecarrier.status == "Destroyed")
     puts "ENEMY RADAR"
     computer.display
     puts "FRIENDLY RADAR"
     player.display
+    puts "Enter Target X Coordinate"
+    xtarget = gets.chomp
+    puts "Enter Target Y Coordinate"
+    ytarget = gets.chomp
+    didithit = computer.hit([xtarget.to_i, ytarget.to_i])
+    puts didithit
 end
