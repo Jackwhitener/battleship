@@ -212,6 +212,8 @@ else
 end
 end
 computer.hide
+computerxcoords = eplacerange.to_a
+computerycoords = eplacerange.to_a
 until (destroyer.status == "Destroyed" && submarine.status == "Destroyed" && battleship.status == "Destroyed" && carrier.status == "Destroyed") || (edestroyer.status == "Destroyed" && esubmarine.status == "Destroyed" && ebattleship.status == "Destroyed" && ecarrier.status == "Destroyed")
     puts "ENEMY RADAR"
     computer.display
@@ -222,5 +224,13 @@ until (destroyer.status == "Destroyed" && submarine.status == "Destroyed" && bat
     puts "Enter Target Y Coordinate"
     ytarget = gets.chomp
     didithit = computer.hit([xtarget.to_i, ytarget.to_i])
-    puts didithit
+    puts "Result:"
+    computer.display
+    # puts didithit
+    puts "The computer aims for..."
+    ctarget = [computerxcoords.sample, computerycoords.sample]
+    puts "(#{ctarget[0]}, #{ctarget[1]})!"
+    player.hit(ctarget)
+    puts "Result:"
+    player.display
 end
