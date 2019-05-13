@@ -14,6 +14,7 @@ while set == false
         esubmarine = Ship.new(computer, 3)
         ebattleship = Ship.new(computer, 4)
         ecarrier = Ship.new(computer, 5)
+        eplacerange = (0..11)
         set = true
     elsif size == "Medium" || size == "medium" || size == "m"
         player = Board.new("Medium")
@@ -27,6 +28,7 @@ while set == false
         esubmarine = Ship.new(computer, 3)
         ebattleship = Ship.new(computer, 4)
         ecarrier = Ship.new(computer, 5)
+        eplacerange = (0..23)
         set = true
     elsif size == "Large" || size == "large" || size == "l"
         player = Board.new("Large")
@@ -39,6 +41,7 @@ while set == false
         esubmarine = Ship.new(computer, 3)
         ebattleship = Ship.new(computer, 4)
         ecarrier = Ship.new(computer, 5)
+        eplacerange = (0..35)
         set = true
     else
         puts "Invalid input, try again!"
@@ -50,15 +53,15 @@ destroyerplaced = false
 until destroyerplaced == true
     player.display
 puts "Where do you want to place your destroyer on the x-axis? (right-to-left)"
-xcoord = gets.chomp
+destroyerxcoord = gets.chomp
 puts "Where do you want to place your destroyer on the y-axis? (up-to-down)"
-ycoord = gets.chomp
+destroyerycoord = gets.chomp
 puts "Would you like your destroyer to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
-direction = gets.chomp
+destroyerdirection = gets.chomp
 # puts "This is xcoord: #{xcoord}"
 # puts "This is ycoord: #{ycoord}"
 # puts "This is direction: #{direction}"
-set = destroyer.setlocation([xcoord.to_i, ycoord.to_i], direction)
+set = destroyer.setlocation([destroyerxcoord.to_i, destroyerycoord.to_i], destroyerdirection)
 
 
 if set == "COORDINATES SET"
@@ -74,15 +77,15 @@ submarineplaced = false
 until submarineplaced == true
     player.display
 puts "Where do you want to place your submarine on the x-axis? (right-to-left)"
-xcoord = gets.chomp
+submarinexcoord = gets.chomp
 puts "Where do you want to place your submarine on the y-axis? (up-to-down)"
-ycoord = gets.chomp
+submarineycoord = gets.chomp
 puts "Would you like your submarine to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
-direction = gets.chomp
+submarinedirection = gets.chomp
 # puts "This is xcoord: #{xcoord}"
 # puts "This is ycoord: #{ycoord}"
 # puts "This is direction: #{direction}"
-set = submarine.setlocation([xcoord.to_i, ycoord.to_i], direction)
+set = submarine.setlocation([submarinexcoord.to_i, submarineycoord.to_i], submarinedirection)
 
 
 if set == "COORDINATES SET"
@@ -91,6 +94,7 @@ if set == "COORDINATES SET"
     player.display
 else
     puts "Something went wrong, try again!"
+    destroyer.setlocation([destroyerxcoord.to_i, destroyerycoord.to_i], destroyerdirection)
 end
 end
 
@@ -98,15 +102,15 @@ battleshipplaced = false
 until battleshipplaced == true
     player.display
 puts "Where do you want to place your battleship on the x-axis? (right-to-left)"
-xcoord = gets.chomp
+battleshipxcoord = gets.chomp
 puts "Where do you want to place your battleship on the y-axis? (up-to-down)"
-ycoord = gets.chomp
+battleshipycoord = gets.chomp
 puts "Would you like your battleship to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
-direction = gets.chomp
+battleshipdirection = gets.chomp
 # puts "This is xcoord: #{xcoord}"
 # puts "This is ycoord: #{ycoord}"
 # puts "This is direction: #{direction}"
-set = battleship.setlocation([xcoord.to_i, ycoord.to_i], direction)
+set = battleship.setlocation([battleshipxcoord.to_i, battleshipycoord.to_i], battleshipdirection)
 
 
 if set == "COORDINATES SET"
@@ -115,6 +119,8 @@ if set == "COORDINATES SET"
     player.display
 else
     puts "Something went wrong, try again!"
+    destroyer.setlocation([destroyerxcoord.to_i, destroyerycoord.to_i], destroyerdirection)
+    submarine.setlocation([submarinexcoord.to_i, submarineycoord.to_i], submarinedirection)
 end
 end
 
@@ -122,15 +128,15 @@ carrierplaced = false
 until carrierplaced == true
     player.display
 puts "Where do you want to place your carrier on the x-axis? (right-to-left)"
-xcoord = gets.chomp
+carrierxcoord = gets.chomp
 puts "Where do you want to place your carrier on the y-axis? (up-to-down)"
-ycoord = gets.chomp
+carrierycoord = gets.chomp
 puts "Would you like your carrier to go horizontally, or vertically?(Valid answers: Horizontal, Vertical)"
-direction = gets.chomp
+carrierdirection = gets.chomp
 # puts "This is xcoord: #{xcoord}"
 # puts "This is ycoord: #{ycoord}"
 # puts "This is direction: #{direction}"
-set = carrier.setlocation([xcoord.to_i, ycoord.to_i], direction)
+set = carrier.setlocation([carrierxcoord.to_i, carrierycoord.to_i], carrierdirection)
 
 
 if set == "COORDINATES SET"
@@ -139,8 +145,69 @@ if set == "COORDINATES SET"
     player.display
 else
     puts "Something went wrong, try again!"
+    destroyer.setlocation([destroyerxcoord.to_i, destroyerycoord.to_i], destroyerdirection)
+    submarine.setlocation([submarinexcoord.to_i, submarineycoord.to_i], submarinedirection)
+    battleship.setlocation([battleshipxcoord.to_i, battleshipycoord.to_i], battleshipdirection)
 end
 end
-# until playerwins == true || computerwins == true
 
-# end
+edestroyerplaced = false
+until edestroyerplaced == true
+    puts "...Placing Enemy Destroyer..."
+    dxcoord = eplacerange.to_a.sample
+    dycoord = eplacerange.to_a.sample
+    ddirection = ["Horizontal", "Vertical"].sample
+set = edestroyer.setlocation([dxcoord.to_i, dycoord.to_i], ddirection)
+if set == "COORDINATES SET"
+    edestroyerplaced = true
+    puts "...Enemy Destroyer Placed..."
+end
+end
+
+ebattleshipplaced = false
+until ebattleshipplaced == true
+    puts "...Placing Enemy Battleship..."
+    bxcoord = eplacerange.to_a.sample
+    bycoord = eplacerange.to_a.sample
+   bdirection = ["Horizontal", "Vertical"].sample
+set = ebattleship.setlocation([bxcoord.to_i, bycoord.to_i], bdirection)
+if set == "COORDINATES SET"
+    ebattleshipplaced = true
+    puts "...Enemy Battleship Placed..."
+else
+    edestroyer.setlocation([dxcoord.to_i, dycoord.to_i], ddirection)
+end
+end
+
+esubmarineplaced = false
+until esubmarineplaced == true
+    puts "...Placing Enemy Submarine..."
+    sxcoord = eplacerange.to_a.sample
+    sycoord = eplacerange.to_a.sample
+    sdirection = ["Horizontal", "Vertical"].sample
+set = esubmarine.setlocation([sxcoord.to_i, sycoord.to_i], sdirection)
+if set == "COORDINATES SET"
+    esubmarineplaced = true
+    puts "...Enemy Submarine Placed..."
+else
+    edestroyer.setlocation([dxcoord.to_i, dycoord.to_i], ddirection)
+    ebattleship.setlocation([bxcoord.to_i, bycoord.to_i], bdirection)
+end
+end
+
+ecarrierplaced = false
+until ecarrierplaced == true
+    puts "...Placing Enemy Carrier..."
+    cxcoord = eplacerange.to_a.sample
+    cycoord = eplacerange.to_a.sample
+    cdirection = ["Horizontal", "Vertical"].sample
+set = ecarrier.setlocation([cxcoord.to_i, cycoord.to_i], cdirection)
+if set == "COORDINATES SET"
+    ecarrierplaced = true
+    puts "...Enemy Carrier Placed..."
+else
+    edestroyer.setlocation([dxcoord.to_i, dycoord.to_i], ddirection)
+    ebattleship.setlocation([bxcoord.to_i, bycoord.to_i], bdirection)
+    esubmarine.setlocation([sxcoord.to_i, sycoord.to_i], sdirection)
+end
+end

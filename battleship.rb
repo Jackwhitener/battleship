@@ -262,7 +262,10 @@ class Board
                     # puts cell[1]
                     if cell[1][0] == "Contains:"
                         
-                       print "(#{cell[1][1].cells.length}"
+                       print "(D" if cell[1][1].size == 2
+                       print "(S" if cell[1][1].size == 3
+                       print "(B" if cell[1][1].size == 4
+                       print "(C" if cell[1][1].size == 5
                        print "I)" if cell[1][1].status == "Intact"
                        print "D)" if cell[1][1].status == "Damaged"
                        print "X)" if cell[1][1].status == "Destroyed"
