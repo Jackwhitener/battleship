@@ -234,3 +234,9 @@ until (destroyer.status == "Destroyed" && submarine.status == "Destroyed" && bat
     puts "Result:"
     player.display
 end
+puts "GAME END"
+if destroyer.status == "Destroyed" && submarine.status == "Destroyed" && battleship.status == "Destroyed" && carrier.status == "Destroyed"
+    puts "COMPUTER WIN"
+elsif edestroyer.status == "Destroyed" && esubmarine.status == "Destroyed" && ebattleship.status == "Destroyed" && ecarrier.status == "Destroyed"
+    puts "PLAYER WIN"
+end
